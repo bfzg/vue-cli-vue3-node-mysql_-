@@ -5,9 +5,12 @@
   </div>
   <section>
     <form class="row g-3">
-        <div class="col-md-12">
-          <input type="text" class="form-control" placeholder="姓名" aria-label="First name">
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="活动名称" aria-label="First name">
         </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="姓名" aria-label="First name">
+      </div>
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">邮箱</label>
         <input type="email" class="form-control" id="inputEmail4">

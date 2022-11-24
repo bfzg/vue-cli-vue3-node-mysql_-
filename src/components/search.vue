@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <div class="search-box">
       <input ref="input_txt" v-model="gettxt" class="search-txt" type="text" placeholder="Type to search" />
       <a class="search-btn" href="#">
@@ -21,7 +21,6 @@ export default {
 
     onMounted(()=>{
       let input_txt = ref([]);
-      console.log(input_txt);
       let ipt_w = (text)=>{
         if(text != ''){
         }
@@ -32,11 +31,17 @@ export default {
 </script>
 
 <style scoped>
+
 .btn-close{
   margin: 30px 0px 0px 30px;
 }
 *{
   box-sizing: content-box!important;
+}
+
+.box{
+  width: 100%;
+  height: 100px;
 }
 
 .search-box {
@@ -50,7 +55,7 @@ export default {
   padding: 10px;
 }
 .search-btn {
-  color: #e84118;
+  color: #f07c82;
   float: right;
   width: 40px;
   height: 40px;

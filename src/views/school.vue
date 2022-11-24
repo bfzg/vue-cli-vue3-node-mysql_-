@@ -7,14 +7,14 @@
     </div>
     <div class="body">
       <div class="container" >
-        <div  @click="open" v-for="(item,index) in list" :key="index" ref="box" class="box">
+        <div  @click="open(item)" v-for="(item,index) in list" :key="index" ref="box" class="box">
           <h5>{{item.title}}</h5>
          <div>
            <div class="content">
              <span>{{item.content}}</span>
            </div>
            <div class="lsd">
-             <span>限定人数: {{item.limit}}</span>
+             <span>联系邮箱: {{item.emali}}</span>
              <span> 发布人：{{item.sponsor}}</span>
              <span>{{item.department}}</span>
            </div>
@@ -34,19 +34,19 @@ export default {
   name: "school",
   setup(){
     const list = [
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',limit:'50'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
     ];
     const state = reactive({
         box:null,
@@ -68,10 +68,10 @@ export default {
       window.addEventListener('scroll',check)
     })
     //点击模态框
-    const open = () => {
+    const open = (item) => {
       ElMessageBox.alert(
-          '<strong><h3>摄影大赛</h3><i>这是比赛详情</i><br><span>加qq：1445237848</span></strong>',
-          '详情',
+          `<div style="word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 100; /* 这里是超出几行省略 */overflow: hidden;"> ${item.content}<br><br><br><span>发起人:${item.sponsor}</span><br><span>联系方式:${item.emali}</span> <br><span>部门:${item.department}</span> </div>`,
+          item.emali,
           {
             dangerouslyUseHTMLString: true,
           }

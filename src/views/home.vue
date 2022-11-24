@@ -2,146 +2,32 @@
  <div>
      <foot></foot>
    <section>
-<!--     排列顺序-->
-       <div class="dropdown">
-         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-           排序方式
-         </button>
-         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-           <li><a class="dropdown-item" href="#">默认</a></li>
-           <li><a class="dropdown-item" href="#">最受欢迎</a></li>
-           <li><a class="dropdown-item" href="#">最新</a></li>
-         </ul>
-       </div>
      <hr>
-<!--     推荐-->
-     <h3>推荐</h3>
-     <div class="t_box">
-       <div class="overflow-hidden  row row-cols-2 ">
-         <div class="card text-center t_care" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class="card text-center t_care" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class="card text-center t_care" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class="card text-center t_care" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-       </div>
-     </div>
      <br>
      <h3>活动</h3>
      <!-- 选项卡-->
      <div class="x_box">
        <div class="overflow-hidden  row row-cols-2 ">
-           <div class=" row gx-5 col card text-center item" style="width: 18rem;">
+           <div v-for="(item,index) in list" :key="index"  class=" row gx-5 col card text-center item" style="width: 18rem;">
              <div class="card-body">
-               <h5 class="card-title">这是一个标题</h5>
-               <p class="card-text">这是描述文本太长了，前端真难写</p>
-               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               <h5 class="card-title">{{item.title}}</h5>
+               <p class="card-text">{{item.content}}</p>
+               <button @click="open(item)" type="button" class="btn btn-primary">
                  查看详情
                </button>
              </div>
            </div>
-         <div class=" row gx-5 col card text-center item" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class=" row gx-5 col card text-center item" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class=" row gx-5 col card text-center item" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
-         <div class=" row gx-5 col card text-center item" style="width: 18rem;">
-           <div class="card-body">
-             <h5 class="card-title">这是一个标题</h5>
-             <p class="card-text">这是描述文本太长了，前端真难写</p>
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               查看详情
-             </button>
-           </div>
-         </div>
        </div>
      </div>
 
      <!--     模态框-->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-       <div class="modal-dialog modal-xl">
-         <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="exampleModalLabel">活动</h5>
-             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-           </div>
-           <div class="modal-body">
-             <div>
-               <h5>这是标题</h5>
-               <div class="box_cont">
-                 <span>fhdsuiahfiwfuiegfiugfiewguifgiufgewiagfuiwgfuiewgfiweugfiewgfiuwegfiewu</span>
-                 <div class="text_cont">
-                   <span>联系人：元</span>
-                   <span>邮箱：13075035453@163.com</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-             <button type="button" class="btn btn-primary">报名</button>
-           </div>
-         </div>
-       </div>
-     </div>
    </section>
  </div>
 </template>
 
 <script>
 import foot from "@/common/nav";
+import { ElMessageBox } from 'element-plus'
 export default {
 
   name: "home",
@@ -149,7 +35,29 @@ export default {
     foot
   },
   setup(){
-
+    let list = [
+      {title:'校园摄影大赛1',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛2',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛3',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛4',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
+    ];
+    const open = (item) => {
+      ElMessageBox.alert(
+          `<div style="word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 100; /* 这里是超出几行省略 */overflow: hidden;"> ${item.content}<br><br><br><span>发起人:${item.sponsor}</span><br><span>联系方式:${item.emali}</span> <br><span>部门:${item.department}</span> </div>`,
+          item.emali,
+          {
+            dangerouslyUseHTMLString: true,
+          }
+      )
+    }
+    return{
+      list,
+      open
+    }
   }
 }
 </script>
@@ -207,5 +115,12 @@ section{
     color: #000;
   }
 }
-
+.card-text{
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 这里是超出几行省略 */
+  overflow: hidden;
+}
 </style>
