@@ -10,7 +10,10 @@
     "axios": "^1.2.0",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.22",
+    "express": "^4.18.2",
     "swiper": "^8.4.5",
+    "unplugin-auto-import": "^0.14.3",
+    "v-wave": "^1.5.0",
     "vant": "^3.6.5",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
@@ -26,5 +29,18 @@
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
     "popper.js": "^1.16.1"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfzg/exhd_vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfzg/exhd_vue/issues"
+  },
+  "homepage": "https://github.com/bfzg/exhd_vue#readme"
 }

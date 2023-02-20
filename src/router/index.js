@@ -13,9 +13,9 @@ const routes = [
     component: () => import('../views/school.vue')
   },
   {
-    path:'/person',
-    name:'person',
-    component: ()=> import('../views/person.vue')
+    path:'/share',
+    name:'share',
+    component: ()=> import('../views/share.vue')
   },
   {
     path:'/login',
@@ -26,7 +26,12 @@ const routes = [
     path:'/upload',
     name:'upload',
     component: ()=>import('../views/upload')
-  }
+  },
+  {
+    path:'/my',
+    name:'my',
+    component: ()=>import('../views/my')
+  },
   // {
   //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   // }
@@ -37,9 +42,18 @@ const router = createRouter({
   routes
 })
 
-//路由守卫
-// router.beforeEach((to,from,next)=>{
-//
-// })
+// 路由守卫
+router.beforeEach((to,from,next)=>{
+ if(to.path == '/' || to.path =='/login'||to.path == '/school'||to.path =='/person'){
+   next();
+ }else{
+    const user = localStorage.getItem('teaUserInfo');
+    if(user != null){
+      next();
+    }else{
+      next('/login');
+    }
+ }
+})
 
 export default router

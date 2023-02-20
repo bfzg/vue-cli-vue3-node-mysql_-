@@ -1,43 +1,7 @@
-/*#app { height: 100% }*/
-/*html,*/
-/*body {*/
-/*    position: relative;*/
-/*    height: 100%;*/
-/*}*/
 
-/*body {*/
-/*    background: #eee;*/
-/*    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
-/*    font-size: 14px;*/
-/*    color: #000;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-/*body {*/
-/*    background: #fff;*/
-/*    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
-/*    font-size: 14px;*/
-/*    color: #000;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-/*html,*/
-/*body {*/
-/*    position: relative;*/
-/*    height: 100%;*/
-/*}*/
-
-/*#app {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-
-/*}*/
 .swiper {
-    width: 80vw;
-    height: 80vh;
+    width: 90vw;
+    height: 85vh;
     display: block;
 }
 .swiper-slide {
@@ -69,10 +33,9 @@
     line-height: 40px;
 }
 .ibox{
-   display: flex;
+    display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    padding-left: 30px;
+    margin-bottom: 10px;
 }
 .ibox img{
     width: 100px;
@@ -81,15 +44,21 @@
     border-radius: 50%;
 }
 .ibox .itext{
-    margin-left: 20px;
-
+    margin-left: 10px;
+    font-size: 0.7rem;
+}
+.text{
+    background-color: rgba(79, 79, 79, 0.5);
+    padding: 5px;
+    border-radius: 5px;
 }
 .ibox .itext h5{
     color: #fff;
-
 }
 .ibox .itext span{
-    color: #555;
+    color: #fff;
+    background-color: #555;
+    padding: 5px;
 }
 .img{
     width: 100px;

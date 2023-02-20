@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-
+import user from './modules/user'
+import dialogBox from "@/store/modules/dialogBox";
 export default createStore({
   state: {
   },
@@ -10,5 +11,7 @@ export default createStore({
   actions: {
   },
   modules: {
+    user,
+    dialogBox
   }
 })

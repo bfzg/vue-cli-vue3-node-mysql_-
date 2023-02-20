@@ -1,190 +1,118 @@
 <template>
-<div>
-  <foot></foot>
-  <section>
-    <div class="font">
-      我的院校： <span>安徽新闻出版职业技术学院</span>
-    </div>
-    <div class="body">
-      <div class="container" >
-        <div  @click="open(item)" v-for="(item,index) in list" :key="index" ref="box" class="box">
-          <h5>{{item.title}}</h5>
-         <div>
-           <div class="content">
-             <span>{{item.content}}</span>
-           </div>
-           <div class="lsd">
-             <span>联系邮箱: {{item.emali}}</span>
-             <span> 发布人：{{item.sponsor}}</span>
-             <span>{{item.department}}</span>
-           </div>
-         </div>
-        </div>
+  <div>
+    <navs></navs>
+    <section>
+      <h5>活动:</h5>
+      <br>
+      <div class="list_box">
+        <transition-group name="list" tag="ul" appear>
+          <li  @click="dialogBoxShow(item)" v-for="item in items" :key="item.id" class="list_item" v-wave="{color: '#2f90b9',initialOpacity: 0.5,easing: 'ease-in',}">
+            <div class="content">
+              <h5>{{item.eventsname}}</h5>
+              <p>{{ item.detailed }}</p>
+            </div>
+            <div class="user_info">
+              <p>发布人:{{item.uname}}</p>
+              <p>活动时间: {{item.starttime}} ---- {{item.shuttime}}</p>
+            </div>
+          </li>
+        </transition-group>
       </div>
-    </div>
-  </section>
-</div>
+      <dialogBox :value="dialogShow.value"></dialogBox>
+    </section>
+  </div>
 </template>
 
-<script>
-import foot from "@/common/nav";
-import {onMounted, ref, reactive, toRefs} from "vue";
-import { ElMessageBox } from 'element-plus'
-export default {
-  name: "school",
-  setup(){
-    const list = [
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元',emali:'1445237848@163.com'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-      {title:'校园摄影大赛',content:'本次比赛所有在校生均可参赛，比赛地点在校内，作品提交为线上提交，评审团：张三，李四，王二，',department:'机电信息系',sponsor:'元'},
-    ];
-    const state = reactive({
-        box:null,
-    });
-    let check = function (){
-      state.box.forEach((box)=>{
-        const windowHeight = window.innerHeight;
-        const rect = box.getBoundingClientRect();
-        const y = rect.y;
-        if (y > windowHeight - 100) {
-          box.classList.remove("show");
-        } else {
-          box.classList.add("show");
-        }
-      })
-    }
-    onMounted(() => {
-      check();
-      window.addEventListener('scroll',check)
-    })
-    //点击模态框
-    const open = (item) => {
-      ElMessageBox.alert(
-          `<div style="word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 100; /* 这里是超出几行省略 */overflow: hidden;"> ${item.content}<br><br><br><span>发起人:${item.sponsor}</span><br><span>联系方式:${item.emali}</span> <br><span>部门:${item.department}</span> </div>`,
-          item.emali,
-          {
-            dangerouslyUseHTMLString: true,
-          }
-      )
-    }
-    return{
-      ...toRefs(state),
-      list,
-      open
-    }
-  },
-  components:{
-    foot
-  }
+<script setup>
+import {reactive, ref,onMounted} from 'vue'
+import navs from "@/components/common/nav";
+//对话框
+import dialogBox from "@/components/common/dialogBox";
+//vuex
+import {useStore} from "vuex";
+//api
+import {getSchoolData} from "@/request/school/index"
+
+let items=ref(null);
+//获取数据
+onMounted(async ()=>{
+ let {data:res} = await getSchoolData();
+  items.value = res.data;
+})
+
+//显示关闭对话框
+let dialogShow = reactive({
+  value:''
+});
+
+//创建vuex的实例
+let {commit} = useStore()
+let dialogBoxShow = (value)=>{
+  dialogShow.value = value;
+  commit('ctrlDialogShow',true);
 }
 </script>
 
 <style lang="less" scoped>
-.modal-dialog{
-  height: 100%;
+section {
+  padding: 40px 40px;
 }
-.font{
-  margin-bottom: 10px;
-}
-section{
-  padding: 50px;
-}
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.body{
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-h1 {
-  font-size: 2em;
-  margin: 40px;
-}
-
-.container {
-  --duration: 0.5s;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow-x: hidden;
-}
-
-.container .box {
-  height: 150px;
+.list_item{
+  margin: 0 auto 35px;
   width: 90%;
-  margin: 12px;
-  border-radius: 10px;
+  height: 150px;
+  background-color: rgba(178,187,190,.5);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  overflow: hidden;
   padding: 10px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px;
-  transform: translateX(-100vw);
-  transition: transform var(--duration);
-  color: #333;
-  cursor:pointer;
-  //transition: color 0.5s;
-  //transition: background-color 0.5s;
-  h5{
-    margin-bottom: 10px;
-    margin-left: 10px;
-    color:#8b614d;
-  }
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.3);
+  box-shadow: 10px 5px 15px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: all 0.2s;
   .content{
-    word-break: break-all;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 这里是超出几行省略 */
-    overflow: hidden;
-    span{
-      margin-left: 40px;
+    flex: 2;
+    p{
+      font-size: 14px;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3; /* 这里是超出几行省略 */
+      overflow: hidden;
     }
   }
-  .lsd{
-    margin-top: 5px;
-    float: right;
-    span{
-      margin-right:15px;
-    }
-    span:nth-child(1){
-      color:#999;
-    }
-    span:nth-child(2){
-      color:#dad4cb;
-    }
-    span:nth-child(3){
-      color:#dad4cb;
-    }
+  .user_info{
+    flex: 1;
+    padding: 0 10px;
+   p{
+     font-size: 14px;
+     word-break: break-all;
+     text-overflow: ellipsis;
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 1; /* 这里是超出几行省略 */
+     overflow: hidden;
+   }
   }
 }
-
-.container .box:hover{
-  color:#222;
-  background-color: #66a9c9;
-}
-.container .box:active{
-  background-color: #93b5cf;
-  color: #333;
+.list_item:hover{
+  width: 95%;
+  height: 160px;
+  box-shadow: 15px 10px 20px rgba(0,0,0,0.5);
 }
 
-.container .box:nth-of-type(2n) {
-  transform: translateX(100vw);
-}
+//设置列表动画
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s ease;
 
-.container .box.show {
-  transform: translateX(0vw);
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  margin-top: 500px;
 }
 </style>

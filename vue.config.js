@@ -11,7 +11,9 @@ module.exports = defineConfig({
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
         Popper: ['popper.js', 'default']
-      })
+      }),
+        //配置vue3api 自动导入
+        require('unplugin-auto-import/webpack')(),
     ]
   }
 })

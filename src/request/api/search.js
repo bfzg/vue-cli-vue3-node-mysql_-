@@ -1,11 +1,9 @@
 import http from '../index';
 //这是搜索
-export function getSearch(text){
+export function getSearch(eventsName){
     return http({
-        method:'GET',
-        url:'你看着给',
-        params:{
-            text:text
-        }
+        method:'get',
+        url:'/api/search/',
+        params:eventsName
     })
 }
