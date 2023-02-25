@@ -21,5 +21,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Compiles and minifies for production
 ```
-在public目录下 目前
+在Martha目录下 目前
 ```
