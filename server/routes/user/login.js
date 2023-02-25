@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
                         let token = jwt.sign(payload, config.jwtSecretKey,{expiresIn:config.expiresIn});
                         //返回结果
                         //返回的用户信息
-                        let userinfo = [{uid:result[0].uid,uimg:result[0].uimg,uintroduction:result[0].uintroduction,uname:result[0].uname}];
+                        let userinfo = [{uid:result[0].uid,uimg:result[0].uimg,uintroduction:result[0].uintroduction,uname:result[0].uname,email:result[0].uemail}];
                         result1 = {
                             code: 200,
                             token: token,

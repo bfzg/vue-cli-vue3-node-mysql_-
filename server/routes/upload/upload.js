@@ -47,12 +47,12 @@ router.post('/upload', (req, res) => {
                 return console.log(err);
             }
         })
-        // TODO : 向首页数据库添加数据!;
-
         connection.query(sql2, [YzId(6), newData.eventsname, newData.uname, newData.email, newData.address, newData.detailed, newData.type, newData.department, newData.starttime, newData.shuttime, newData.files], (err2, results2) => {
             if (err2) return console.log(err2);
             return  console.log('yes')
         })
+        // 关闭数据库连接
+        connection.end();
     })
     return res.send({status:200,message:'上传成功！'});
     //随机生成6位id
@@ -64,9 +64,6 @@ router.post('/upload', (req, res) => {
         }
         return str;
     }
-
-    // 关闭数据库连接
-    connection.end();
 })
 
 

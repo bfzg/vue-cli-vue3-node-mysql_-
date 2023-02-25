@@ -23,7 +23,6 @@ app.listen(8000, function () {
 // const expressJWT = require('express-jwt');
 // const config = require('./config');
 // app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] }))
-
 // 解析 application/json
 app.use(bodyParser.json());
 // 静态文件
@@ -44,22 +43,28 @@ app.use('/api',school);
 //引入查询个人活动模板
 const personal = require('./routes/personal/personal');
 app.use('/api',personal);
-//引入我的 修改头像模块
-const my = require('./routes/my/alterPicture')
-app.use(my);
 //引入使用搜索模块
 const search = require('./routes/search/search');
 app.use('/api',search);
+//引入报名模块
+const upSignUp = require('./routes/signUp/signUp');
+app.use('/api',upSignUp);
+//引入我的 修改头像模块
+const my = require('./routes/my/alterPicture')
+app.use(my);
 //引入文件上传及活动上传模块
 const upload = require('./routes/upload/upload');
 app.use(upload);
 //引入下载模块
 const download = require('./routes/download/download');
-app.use(download)
+app.use('/api',download);
+//查询参加活动模块
+const myJoin = require('./routes/my/myJoin');
+app.use('/api',myJoin);
 
 // 监听服务开启
-app.listen('3333', '0.0.0.0', (res) => {
-  console.log('Server running http://0.0.0.0:3333')
+app.listen('3000', '127.0.0.1', (res) => {
+  console.log('Server running http://127.0.0.1:3000')
 })
 
 // view engine setup

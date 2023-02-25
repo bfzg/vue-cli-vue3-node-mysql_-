@@ -3,7 +3,6 @@ const user={
         loginStatus:false,    //登录状态
         // token: "",   //token
         userInfo: {},   //用户登录信息
-        ingo:'fdsa'
     },
     getters:{
 

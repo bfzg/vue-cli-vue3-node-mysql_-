@@ -3,7 +3,7 @@ import axios from "axios";
 import {ElMessage,ElLoading} from "element-plus";
 
 let service = axios.create({
-    baseURL:"http://localhost:3000/",
+    baseURL:"http://127.0.0.1:3000/",
     timeout:3000,
 
 })
@@ -20,7 +20,7 @@ service.interceptors.response.use(
     },
     (err)=>{
         if(err.response && err.response.status === 401){
-            console.log('401跳转')
+            alert('404 请刷新重试!')
         }
         else if(err.response.status === 301){
             alert('获取信息失败，请刷新网页');

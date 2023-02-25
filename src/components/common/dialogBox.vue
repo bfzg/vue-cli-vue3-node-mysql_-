@@ -14,16 +14,19 @@
           <p>{{props.value.detailed}}</p>
       </div>
       <div class="user_info">
-        <li>联系方式: {{props.value.email}}</li>
-        <li>发起人: {{props.value.uname}}</li>
-        <li>地点: {{props.value.address}}</li>
-        <li>活动时间: {{props.value.starttime}} ----- {{props.value.shuttime}}</li>
-        <li>系部: {{props.value.department}}</li>
+       <ul>
+         <li>联系方式: {{props.value.email}}</li>
+         <li>发起人: {{props.value.uname}}</li>
+         <li>地点: {{props.value.address}}</li>
+         <li>活动时间: {{props.value.starttime}} ----- {{props.value.shuttime}}</li>
+         <li>系部: {{props.value.department}}</li>
+       </ul>
       </div>
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="success">下载文件</el-button>
+        <el-button type="success" @click="downLoad(props.value)">下载文件</el-button>
+        <el-button @click="open(props.value)" type="primary">报名</el-button>
         <el-button @click="dialogBoxHide">确定</el-button>
       </span>
     </template>
@@ -32,10 +35,16 @@
 </template>
 
 <script setup>
-import { defineProps,computed} from "vue";
+import {computed,reactive} from "vue";
 //vuex
 import {useStore} from "vuex";
+//element-plus
+import { ElMessage, ElMessageBox } from 'element-plus'
+//axios
+import {postSignUp} from "@/request/api/signUp";
+import {download} from "@/request/api/download";
 
+/*活动详情 start*/
 //控制对话框的显示与隐藏
 let props = defineProps(['value'])
 
@@ -47,6 +56,66 @@ let dialogShow = computed(()=> state.dialogBox.dialogShow);
 const dialogBoxHide = ()=>{
   commit('ctrlDialogShow',false);
 }
+/*活动详情 end*/
+/*报名 start*/
+const open = (value) => {
+  ElMessageBox.alert('确定参加此活动', '报名', {
+    confirmButtonText: 'OK',
+    callback: async (action) =>{
+      //获取用户信息
+      if(action === 'cancel'){
+        return  ElMessage({
+          type: 'info',
+          message: '你已取消报名',
+        })
+      }
+      let {value:userInfo} =  computed(()=> state.user.userInfo);
+     let data = reactive({
+       uid:userInfo[0].uid,
+       tid:value.id,
+       uname:userInfo[0].uname,
+       uemail:userInfo[0].email,
+       eventsname:value.eventsname
+     });
+      console.log(data)
+      const {data:res} = await postSignUp(data);
+      console.log(res)
+      if(res.status === 201){
+        return  ElMessage({
+          type: 'warning',
+          message: res.message
+        })
+      }else if(res.status === 200){
+        return  ElMessage({
+          type: 'success',
+          message: res.message
+        })
+      }else{
+        return ElMessage({
+          type: 'warning',
+          message: '出现错误!'
+        })
+      }
+    },
+  })
+}
+/*报名 end*/
+
+/*下载*/
+const downLoad = async function (value){
+  // console.log(value)
+  if(value.file == null){
+    return  ElMessage({
+      type: 'warning',
+      message: '该活动没有相关文件!'
+    })
+  }
+  let {data:res} = await download(value.id);
+  console.log(res)
+  //创建一个新的窗口用于下载
+  window.open(res.file, '_blank', 'fullscreen=no,width=400,height=300');
+}
+/*下载 end*/
 </script>
 
 <style scoped>
