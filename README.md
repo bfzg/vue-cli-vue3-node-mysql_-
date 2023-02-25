@@ -18,3 +18,8 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 # EveryDay_zbc
+
+### Compiles and minifies for production
+```
+在public目录下 目前
+```
