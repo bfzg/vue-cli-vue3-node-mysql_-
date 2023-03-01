@@ -4,6 +4,8 @@ const router = express.Router();
 const multiparty = require('multiparty')
 //引入数据库
 const mysql = require('../../mysql/mysql');
+//拼接图片路径
+let splicAddress = require('../../javascript/splicingAddress.js')
 
 router.post('/alterPicture',(req,res)=>{
     const form = new multiparty.Form();
@@ -27,8 +29,7 @@ router.post('/alterPicture',(req,res)=>{
         //获取用户id
         let id = data.uid.toString();
         //获取头像存放位置
-        let uimg ='http://127.0.0.1:3000' + (fileds.file[0].path.slice(6));
-        console.log(uimg)
+        let uimg = splicAddress.splicingAddress(fileds.images);
         const sql = 'update user set uimg=? where uid=?';
         db(sql,uimg,id);
 

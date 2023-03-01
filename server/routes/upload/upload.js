@@ -12,6 +12,7 @@ router.post('/upload', (req, res) => {
         if (err) return res.send({status: 302, message: '文件上传失败!'});
         // 接收到的表单数据
         let newData = {
+            uid:data.uid[0],
             eventsname: data.eventsname[0],
             email: data.email[0],
             uname: data.uname[0],
@@ -24,7 +25,6 @@ router.post('/upload', (req, res) => {
             files: []
         };
         //遍历发来的文件
-        var sql;
         var sql2;
         if (fileds.files !== undefined) {
             fileds.files.forEach((i) => {
@@ -32,38 +32,24 @@ router.post('/upload', (req, res) => {
                 var uimg = "http://127.0.0.1:3000/" + i.path.slice(6);
                 newData.files.push(uimg);
             })
-            sql = `insert into ${newData.type} values(?,?,?,?,?,?,?,?,?,?,?)`;
-            sql2 = 'insert into all_events values(?,?,?,?,?,?,?,?,?,?,?)';
+            sql2 = 'insert into all_events values(null,?,?,?,?,?,?,?,?,?,?,?)';
         }
         else {
-            sql = `insert into ${newData.type} values(?,?,?,?,?,?,?,?,?,?,null)`;
-            sql2 = 'insert into all_events values(?,?,?,?,?,?,?,?,?,?,null)';
+            sql2 = 'insert into all_events values(null,?,?,?,?,?,?,?,?,?,?,null)';
         }
         //连接数据库
         connection = mysql.createConnection();
         connection.connect();
-        connection.query(sql, [YzId(6), newData.eventsname, newData.uname, newData.email, newData.address, newData.detailed, newData.type, newData.department, newData.starttime, newData.shuttime, newData.files], (err, results) => {
+        connection.query(sql2, [newData.uid, newData.eventsname, newData.uname, newData.email, newData.address, newData.detailed, newData.type, newData.department, newData.starttime, newData.shuttime, newData.files], (err, results) => {
             if (err) {
                 return console.log(err);
             }
-        })
-        connection.query(sql2, [YzId(6), newData.eventsname, newData.uname, newData.email, newData.address, newData.detailed, newData.type, newData.department, newData.starttime, newData.shuttime, newData.files], (err2, results2) => {
-            if (err2) return console.log(err2);
-            return  console.log('yes')
+            res.send({status:200,message:'上传成功！'});
         })
         // 关闭数据库连接
         connection.end();
     })
-    return res.send({status:200,message:'上传成功！'});
-    //随机生成6位id
-    function YzId(n) {
-        let str = "";
-        const arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-        for (let i = 0; i < n; i++) {
-            str += arr[Math.floor(Math.random() * arr.length)];
-        }
-        return str;
-    }
+
 })
 
 

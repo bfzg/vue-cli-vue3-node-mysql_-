@@ -58,9 +58,13 @@ app.use(upload);
 //引入下载模块
 const download = require('./routes/download/download');
 app.use('/api',download);
-//查询参加活动模块
-const myJoin = require('./routes/my/myJoin');
+//查询活动模块
+const myJoin = require('./routes/my/myEvents');
 app.use('/api',myJoin);
+//动态模块
+const dynamic = require('./routes/dynamic/dynamic');
+app.use('/api',dynamic);
+
 
 // 监听服务开启
 app.listen('3000', '127.0.0.1', (res) => {

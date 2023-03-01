@@ -21,10 +21,10 @@ router.post('/signup',(req,res)=>{
         }
         else if(results.length === 0){
             //插入数据 报名
-            let sql2 = 'insert into events_join values (null,?,?,?,?,?);';
+            let sql2 = 'insert into events_join values (null,?,?,?,?,?,?,?,?,?);';
             connection = mysql.createConnection();
             connection.connect();
-            connection.query(sql2,[data.uid,data.tid,data.uname,data.uemail,data.eventsname],(err,results)=>{
+            connection.query(sql2,[data.uid,data.tid,data.uname,data.uemail,data.eventsname,data.tname,data.address,data.time,data.file],(err,results)=>{
                 if(err) {
                     return console.log(err);
                 }

@@ -75,7 +75,11 @@ const open = (value) => {
        tid:value.id,
        uname:userInfo[0].uname,
        uemail:userInfo[0].email,
-       eventsname:value.eventsname
+       eventsname:value.eventsname,
+       tname:value.uname,
+       address:value.address,
+       time:value.shuttime,
+       file:value.file
      });
       console.log(data)
       const {data:res} = await postSignUp(data);

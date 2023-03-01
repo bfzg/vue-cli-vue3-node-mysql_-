@@ -7,6 +7,7 @@ export default {
   setup(){
     let {commit} = useStore();
     commit("inituser");
+    commit("getUserJPInfo");
   }
 }
 </script>

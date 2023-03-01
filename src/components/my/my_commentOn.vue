@@ -7,7 +7,7 @@
 
 <script setup>
 import titleList from "@/components/my/title"
-import Lines from "@/components/common/line";
+import Lines from "@/components/common/lines";
 </script>
 
 <style scoped>

@@ -10,11 +10,11 @@
         <el-form-item label="活动名称" prop="eventsname">
           <el-input v-model="updateForm.eventsname"/>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item label="联系方式" prop="email">
           <el-input v-model="updateForm.email"/>
         </el-form-item>
         <el-form-item label="联系人姓名" prop="uname">
-          <el-input v-model="updateForm.uname"/>
+          <el-input v-model="updateForm.uname" disabled placeholder="Please input" />
         </el-form-item>
         <el-form-item label="活动详情">
           <el-input v-model="updateForm.detailed" type="textarea"/>
@@ -70,6 +70,7 @@
               :on-exceed="exceedMaxFile"
               :auto-upload="false"
               :on-change="handleChanged"
+              ref="uploadrefss"
           >
             <el-button type="primary">点击上传文件</el-button>
           </el-upload>
@@ -84,18 +85,23 @@
 
 <script>
 import router from "@/router";
-import {reactive, ref, unref} from 'vue'
+import {computed, reactive, ref, toRaw, unref} from 'vue'
 import {upload} from '@/request/api/update'
 //element提示
 import {ElMessage, FormInstance} from 'element-plus'
-
+//vuex
+import {useStore} from "vuex"
 export default {
   setup() {
+    let {state} = useStore();
+    let user = toRaw(computed(() => state.user.userInfo).value);
+
     // 上传表单数据
     let updateForm = reactive({
+      uid:user[0].uid,
       eventsname: '',
       email: '',
-      uname: '',
+      uname: user[0].uname,
       detailed: '',
       address: '',
       starttime: '',
@@ -104,17 +110,6 @@ export default {
       type: '',
       files: []
     });
-
-    // 自定义验证规则
-    const validatePass = (rule, value, callback) => {
-      //  密码只能由大小写英文字母或数字开头，且由大小写英文字母_.组成
-      const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-      if (!value.match(reg)) {
-        callback(new Error('请检查邮箱格式'))
-      } else {
-        callback()
-      }
-    };
     //表单校验
     const updateFormRules = reactive({
       eventsname: [
@@ -122,10 +117,6 @@ export default {
       ],
       email: [
         {required: true, message: '请输入邮箱', trigger: 'blur'},
-        {validator: validatePass, trigger: 'blur'}
-      ],
-      uname: [
-        {required: true, message: '请输入发布人姓名', trigger: 'blur'},
       ],
       type: [
         {required: true, message: '请选择你所属的类型', trigger: 'change',},
@@ -139,7 +130,8 @@ export default {
     });
 
     //确认上传
-    const updateFormRef = ref(null);
+    let updateFormRef = ref(null);
+    let uploadrefss = ref(null);
     const update = function () {
       //判断是否有表单项未输入
       updateFormRef.value.validate(async (valid) => {
@@ -155,6 +147,8 @@ export default {
             updateForm.address = '';
             updateForm.shuttime= '';
             updateFormRef.value.resetFields();
+
+            uploadrefss.value.clearFiles()
             return ElMessage.success(res.message);
           }else{
             return ElMessage.error('上传失败!');
@@ -173,7 +167,7 @@ export default {
         type: 'warning',
       })
     }
-    //文件改变时的操作
+    //文件改变时的操作 不自动上传设置
     const handleChanged = function (file) {
       updateForm.files = file.raw;
     }

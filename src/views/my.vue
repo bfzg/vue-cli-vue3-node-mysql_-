@@ -16,8 +16,8 @@
               <p :title="user[0].uintroduction" class="uintroduction">{{user[0].uintroduction}}</p>
             </div>
             <div class="txt_list">
-              <span class="t">5</span><span class="c">已发布</span>
-              <span class="t">4</span><span class="c">已参加</span>
+              <span class="t">{{ joinNumber }}</span><span class="c">已发布</span>
+              <span class="t">{{ publishNumber }}</span><span class="c">已参加</span>
             </div>
           </div>
       </div>
@@ -40,9 +40,9 @@
           </div>
       </div>
       <div class="content">
-        <myjoin v-if="index === 0 ? true : false"></myjoin>
-        <mypublish v-if="index === 1 ? true : false"></mypublish>
-        <mycommentOn v-if="index === 2 ? true : false"></mycommentOn>
+        <myjoin v-show="index === 0 ? true : false"></myjoin>
+        <mypublish v-show="index === 1 ? true : false"></mypublish>
+        <mycommentOn v-show="index === 2 ? true : false"></mycommentOn>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@
 </template>
 <script setup>
 import navs from "@/components/common/nav";
-import lines from "@/components/common/line";
+import lines from "@/components/common/lines";
 //三个功能组件
 import myjoin from "@/components/my/my_join";
 import mypublish from "@/components/my/my_publish";
@@ -98,7 +98,7 @@ const list = [
 ];
 
 //点击功能列表 跳转到 相应的模块
-let index = ref(0);
+let index = ref(1);
 const selectList = function (id){
   if(index.value === id){
     return;
@@ -109,9 +109,11 @@ const selectList = function (id){
 /*退出登录*/
   //实例化vuex
   let {state} = useStore();
-  //渲染用户信息
   let user = toRaw(computed(() => state.user.userInfo).value);
-  //退出登录功能
+  let joinNumber = toRaw(computed(() => state.user.join));
+  let publishNumber = toRaw(computed(() => state.user.publish));
+
+//退出登录功能
   const quit = function () {
     localStorage.removeItem('teaUserInfo');
     localStorage.removeItem('token')

@@ -5,7 +5,9 @@ function createConnection() {
         host:'localhost',
         user:'root',
         password:"200312",
-        database:'vuehuodong'
+        database:'vuehuodong',
+        charset: "UTF8MB4_GENERAL_CI",
+        collate: "utf8mb4_unicode_ci",
     });
     return connection;
 }
