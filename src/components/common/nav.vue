@@ -17,7 +17,7 @@
               <a class="nav-link" href="javascript:" @click="goschool">学校活动</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="javascript:" @click="goperson">个人活动</a>
+              <a class="nav-link" href="javascript:" @click="goperson">动态</a>
             </li>
           </ul>
           <div class="d-flex">
