@@ -38,7 +38,7 @@ router.post('/upload', (req, res) => {
             sql2 = 'insert into all_events values(null,?,?,?,?,?,?,?,?,?,?,null)';
         }
         //连接数据库
-        connection = mysql.createConnection();
+        let connection = mysql.createConnection();
         connection.connect();
         connection.query(sql2, [newData.uid, newData.eventsname, newData.uname, newData.email, newData.address, newData.detailed, newData.type, newData.department, newData.starttime, newData.shuttime, newData.files], (err, results) => {
             if (err) {

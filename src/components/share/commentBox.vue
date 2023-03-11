@@ -20,11 +20,10 @@
       <!--      功能列表-->
       <div class="function_box">
         <i class="iconfont icon-xiaoxi1"  @click="ctrlSonInputBox(index)"></i>
-        <i class="iconfont icon-aixin"></i>
       </div>
       <!--      回复评论框-->
       <div v-if="sonInputBoxIndex == index ? true : false " class="sonInputBox">
-        <sonInputBox :pid="item.id"></sonInputBox>
+        <sonInputBox :pname="item.uname" :pid="item.id"></sonInputBox>
       </div>
       <!--      子级评论-->
       <div v-if="sonInputBoxIndex == index ? true : false" class="sonCommentBox">
@@ -34,7 +33,8 @@
               <el-avatar :size="50" :src="n.uimg"/>
             </div>
             <div class="son_title_box">
-              <h6>{{n.uname}}</h6>
+              <p class="uname">{{n.uname}} 回复</p>
+              <p class="pname">{{n.pname}}</p>
             </div>
           </div>
           <div class="son_content_box">
@@ -185,21 +185,18 @@ const ctrlSonInputBox = function (index) {
 
     .son_title_box {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: center;
 
-      h6 {
+      p{
         padding: 0;
-        margin: 3px 0;
+        margin: 3px 3px;
         display: block;
-
+      }
+      .pname{
+        color:#4d84e2;
       }
 
-      span {
-        display: block;
-        font-size: 10px;
-        color: #aaaaaa;
-      }
     }
   }
 

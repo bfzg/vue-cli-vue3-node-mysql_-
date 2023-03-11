@@ -56,7 +56,7 @@
 
     <el-upload
         class="avatar-uploader"
-        action="http://127.0.0.1:3000/alterPicture"
+        action="http://192.168.31.233:3000/alterPicture"
         :data="uploadData"
         :before-upload="beforeAvatarUpload"
         :on-success="handleAvatarSuccess"

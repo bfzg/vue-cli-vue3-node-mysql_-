@@ -10,7 +10,6 @@
       <el-table-column prop="email" label="联系方式" width="300" />
       <el-table-column prop="eventsname" label="操作" width="150" >
         <template  #default="scope">
-          <el-button type="primary" :icon="Edit" circle />
           <el-button @click="removeEvents(scope.row)" type="danger" :icon="Delete" circle />
         </template>
       </el-table-column>

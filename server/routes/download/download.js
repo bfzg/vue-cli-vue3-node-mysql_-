@@ -8,7 +8,7 @@ router.get('/download',(req,res)=>{
     let id = req.query.id;
     //连接数据库
     const sql = 'select file from all_events where id=?';
-    connection = mysql.createConnection();
+    let connection = mysql.createConnection();
     connection.connect();
     connection.query(sql,id,(err,results)=>{
         if(err) return console.log(err);
@@ -16,6 +16,7 @@ router.get('/download',(req,res)=>{
         // res.send({status:200,message:'下载成功!',file:results});
         // res.send({status: 200,message:'下载失败!'})
     })
+    connection.end();
 })
 
 module.exports = router;

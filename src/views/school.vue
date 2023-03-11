@@ -18,13 +18,13 @@
           </li>
         </transition-group>
       </div>
-      <dialogBox :value="dialogShow.value"></dialogBox>
+      <dialogBox v-if="ctrlDialogBoxShow"></dialogBox>
     </section>
   </div>
 </template>
 
 <script setup>
-import {reactive, ref,onMounted} from 'vue'
+import {reactive, ref, onMounted, computed} from 'vue'
 import navs from "@/components/common/nav";
 //对话框
 import dialogBox from "@/components/common/dialogBox";
@@ -41,15 +41,12 @@ onMounted(async ()=>{
 })
 
 //显示关闭对话框
-let dialogShow = reactive({
-  value:''
-});
+let {commit,state} = useStore();
+let ctrlDialogBoxShow = computed(()=>state.dialogBox.dialogShow)
 
-//创建vuex的实例
-let {commit} = useStore()
 let dialogBoxShow = (value)=>{
-  dialogShow.value = value;
-  commit('ctrlDialogShow',true);
+  commit('ctrlDialogShow', true);
+  commit('getEventsInfo',value);
 }
 </script>
 

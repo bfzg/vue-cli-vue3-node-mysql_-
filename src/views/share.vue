@@ -11,7 +11,7 @@
         </div>
         <div :class="marginCenterBox ? 'marginCenterBox' : ''" class="center_small_box wrapper">
           <div class="bs_box">
-            <inputBox></inputBox>
+            <inputBoxs></inputBoxs>
             <commentBox :dataList="dataList" @click-picture="emitPic"></commentBox>
           </div>
         </div>
@@ -27,7 +27,7 @@ import navs from "@/components/common/nav";
 import Bscroll from 'better-scroll'
 import {onMounted, nextTick, ref, reactive, watch, toRaw, onBeforeUpdate} from "vue";
 //组件
-import inputBox from "@/components/share/inputBox";
+import inputBoxs from "@/components/share/inputBox";
 import userInfo from "@/components/share/userInfo";
 import commentBox from "@/components/share/commentBox";
 import previewPicture from "@/components/share/previewPicture";

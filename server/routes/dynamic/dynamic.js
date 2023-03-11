@@ -30,7 +30,6 @@ router.get('/comments',(req,res)=>{
             }
         })
         /* end 对数据经行处理 */
-        console.log(result)
         res.send({status:200,data:result})
     })
     connection.end();

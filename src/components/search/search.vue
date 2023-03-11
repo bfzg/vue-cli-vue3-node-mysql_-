@@ -12,20 +12,24 @@
           <div class="card-body">
             <h5 class="card-title">{{item.eventsname}}</h5>
             <p class="card-text">{{item.detailed}}</p>
-            <button @click="open(item)" type="button" class="btn btn-primary">
+            <button @click="dialogBoxShows(item)" type="button" class="btn btn-primary">
               查看详情
             </button>
           </div>
         </div>
       </div>
+      <dialogBox v-if="ctrlDialogBoxShow"></dialogBox>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref, reactive} from "vue";
+import {ref, reactive, computed} from "vue";
 import {getSearch} from "@/request/api/search";
 import {ElMessageBox} from "element-plus";
+//对话框
+import dialogBox from "@/components/common/dialogBox"
+import {useStore} from "vuex";
 //使用搜索功能
 //获取输入的数据
 const eventsName = ref('');
@@ -39,17 +43,13 @@ const getData = async function () {
   o.list = res.results;
 }
 
-//模态框
-const open = (item) => {
-  ElMessageBox.alert(
-      `<div style="word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 100; /* 这里是超出几行省略 */overflow: hidden;"> <h5>${item.eventsname}</h5><br><span>${item.detailed}</span><br><br><br><span> 发起人:${item.uname}</span><br><span> 联系方式:${item.email}</span> <br><span>部门: ${item.department}</span><br>活动时间: <span>${item.starttime} ---- ${item.shuttime}</span> </div>`,
-      item.emali,
-      {
-        dangerouslyUseHTMLString: true,
-      }
-  )
-};
-
+//点击详情
+let {commit,state} = useStore();
+let ctrlDialogBoxShow = computed(()=>state.dialogBox.dialogShow)
+const dialogBoxShows = function (value){
+      commit('ctrlDialogShow', true);
+      commit('getEventsInfo',value);
+}
 </script>
 
 <style lang="less" scoped>

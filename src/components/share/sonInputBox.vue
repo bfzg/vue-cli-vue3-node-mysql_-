@@ -84,7 +84,7 @@ let sonupFormData = reactive({
   uid:user[0].uid,      //用户id 用来检索用户评论
   uimg:user[0].uimg,     //用户头像
   uname:user[0].uname,    //用户姓名
-  pname:'',    //被回复的姓名
+  pname:props.pname,    //被回复的姓名
   comment:'',  //评论内容
 })
 //存储多张图片
@@ -160,8 +160,10 @@ const onError = function (files){
 /** end 发布评论*/
 
 /** 回复功能 */
-const props = defineProps(['pid']);
+const props = defineProps(['pid','pname']);
 console.log(props.pid);
+console.log(props.pname);
+
 /** end 回复功能 */
 </script>
 

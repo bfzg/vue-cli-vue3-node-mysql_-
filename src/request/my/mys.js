@@ -28,3 +28,13 @@ export function postRemoveEvents(data){
         data
     })
 }
+//获取我的评论
+export function getCommentList(id){
+    return http({
+        method:'get',
+        url:'/api/myComment',
+        params:{
+            uid:id
+        }
+    })
+}

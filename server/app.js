@@ -40,9 +40,6 @@ app.use('/api',homeList);
 //引入查询学校活动模块
 const school = require('./routes/school/school');
 app.use('/api',school);
-//引入查询个人活动模板
-const personal = require('./routes/personal/personal');
-app.use('/api',personal);
 //引入使用搜索模块
 const search = require('./routes/search/search');
 app.use('/api',search);

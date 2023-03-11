@@ -20,7 +20,7 @@
             </div>
           </div>
       </div>
-      <dialogBox :value="dialogShow.value"></dialogBox>
+      <dialogBox v-if="ctrlDialogBoxShow" ></dialogBox>
     </section>
 
   </div>
@@ -29,28 +29,26 @@
 <script setup>
 import foot from "@/components/common/nav";
 import {getHomeList} from "@/request/home/home";
-import {reactive, onMounted, ref} from "vue";
+import {onMounted, ref, computed} from "vue";
 //对话框
 import dialogBox from "@/components/common/dialogBox"
 //vuex
 import {useStore} from "vuex"
-//获取首页活动数据
+/** 获取首页活动数据*/
 let list = ref([])
-const getdata = async () => {
+
+onMounted(async ()=>{
   let {data: res} = await getHomeList();
   list.value = res.data;
-}
-getdata();
-//控制对话框的显示与隐藏
-let dialogShow = reactive({
-  value: ''
-});
+})
 
-//创建vuex的实例
-let {commit} = useStore()
+
+/** 控制对话框的显示与隐藏*/
+let {commit,state} = useStore();
+let ctrlDialogBoxShow = computed(()=>state.dialogBox.dialogShow)
 let dialogBoxShow = (value) => {
-  dialogShow.value = value;
   commit('ctrlDialogShow', true);
+  commit('getEventsInfo',value);
 }
 
 </script>

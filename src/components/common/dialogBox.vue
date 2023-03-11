@@ -2,7 +2,7 @@
 <div>
   <el-dialog
       v-model="dialogShow"
-      :title="props.value.eventsname"
+      :title="eventsInfo.eventsname"
       width="50%"
       align-center
       draggable
@@ -11,22 +11,22 @@
   >
     <div>
       <div class="content">
-          <p>{{props.value.detailed}}</p>
+          <p>{{eventsInfo.detailed}}</p>
       </div>
       <div class="user_info">
        <ul>
-         <li>联系方式: {{props.value.email}}</li>
-         <li>发起人: {{props.value.uname}}</li>
-         <li>地点: {{props.value.address}}</li>
-         <li>活动时间: {{props.value.starttime}} ----- {{props.value.shuttime}}</li>
-         <li>系部: {{props.value.department}}</li>
+         <li>联系方式: {{eventsInfo.email}}</li>
+         <li>发起人: {{eventsInfo.uname}}</li>
+         <li>地点: {{eventsInfo.address}}</li>
+         <li>活动时间: {{eventsInfo.starttime}} ----- {{eventsInfo.shuttime}}</li>
+         <li>系部: {{eventsInfo.department}}</li>
        </ul>
       </div>
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="success" @click="downLoad(props.value)">下载文件</el-button>
-        <el-button @click="open(props.value)" type="primary">报名</el-button>
+        <el-button type="success" @click="downLoad(eventsInfo)">下载文件</el-button>
+        <el-button @click="open(eventsInfo)" type="primary">报名</el-button>
         <el-button @click="dialogBoxHide">确定</el-button>
       </span>
     </template>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import {computed,reactive} from "vue";
+import {computed, reactive,ref, watch} from "vue";
 //vuex
 import {useStore} from "vuex";
 //element-plus
@@ -45,16 +45,17 @@ import {postSignUp} from "@/request/api/signUp";
 import {download} from "@/request/api/download";
 
 /*活动详情 start*/
-//控制对话框的显示与隐藏
 let props = defineProps(['value'])
-
+//控制对话框的显示与隐藏
 //创建vux实例
 let {commit,state} = useStore();
 let dialogShow = computed(()=> state.dialogBox.dialogShow);
-
+//获取数据
+let eventsInfo = computed(()=>state.dialogBox.eventsInfo).value;
 //确定按钮
 const dialogBoxHide = ()=>{
   commit('ctrlDialogShow',false);
+  commit('removeEventsInfo')
 }
 /*活动详情 end*/
 /*报名 start*/
@@ -72,14 +73,14 @@ const open = (value) => {
       let {value:userInfo} =  computed(()=> state.user.userInfo);
      let data = reactive({
        uid:userInfo[0].uid,
-       tid:value.id,
+       tid:eventsInfo.id,
        uname:userInfo[0].uname,
        uemail:userInfo[0].email,
-       eventsname:value.eventsname,
-       tname:value.uname,
-       address:value.address,
-       time:value.shuttime,
-       file:value.file
+       eventsname:eventsInfo.eventsname,
+       tname:eventsInfo.uname,
+       address:eventsInfo.address,
+       time:eventsInfo.shuttime,
+       file:eventsInfo.file
      });
       console.log(data)
       const {data:res} = await postSignUp(data);
@@ -120,6 +121,7 @@ const downLoad = async function (value){
   window.open(res.file, '_blank', 'fullscreen=no,width=400,height=300');
 }
 /*下载 end*/
+
 </script>
 
 <style scoped>

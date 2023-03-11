@@ -3,6 +3,7 @@ const router = express.Router();
 //引入数据库
 const mysql = require('../../mysql/mysql');
 
+//我参加的
 router.get('/myJoin',(req,res)=>{
     let userInfo = req.query;
     //连接数据库
@@ -21,9 +22,10 @@ router.get('/myJoin',(req,res)=>{
     connection.end();
 });
 
+//我发布的
 router.get('/mypublic',(req,res)=>{
     //连接数据库
-    connection = mysql.createConnection();
+    let connection = mysql.createConnection();
     connection.connect();
     let sql = 'select * from all_events where uid=?';
     connection.query(sql,req.query.uid,(err,results)=>{
@@ -41,7 +43,7 @@ router.get('/mypublic',(req,res)=>{
 router.post('/remove',(req,res)=>{
     console.log(req.body);
     //连接数据库
-    connection = mysql.createConnection();
+    let connection = mysql.createConnection();
     connection.connect();
     let sql = "delete from all_events where uid=? and id=?";
     connection.query(sql,[req.body.uid,req.body.tid],(err,results)=>{
@@ -57,4 +59,16 @@ router.post('/remove',(req,res)=>{
     connection.end();
 })
 
+//我的评论
+router.get('/myComment',(req,res)=>{
+    console.log(req.query);
+    let sql = 'select * from dynamic where uid=?';
+    let connection = mysql.createConnection();
+    connection.connect();
+    connection.query(sql,req.query.uid,(err,results)=>{
+        if(err) return console.log(err);
+        res.send({status:200,data:results});
+    })
+    connection.end();
+})
 module.exports = router;

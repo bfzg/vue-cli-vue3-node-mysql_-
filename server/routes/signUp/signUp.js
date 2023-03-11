@@ -8,7 +8,7 @@ router.post('/signup',(req,res)=>{
     //查询语句
     let sql1 = 'select * from events_join where uid=? and tid=? and uname=?';
     //连接数据库
-    connection = mysql.createConnection();
+    let connection = mysql.createConnection();
     connection.connect();
     connection.query(sql1,[data.uid,data.tid,data.uname],(err,results)=>{
         // 查询数据库 防止重复报名

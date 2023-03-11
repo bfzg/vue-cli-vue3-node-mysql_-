@@ -14,7 +14,7 @@
 </template>
 <script setup>
 import appData from "./emoji.js"
-import {onMounted,defineEmits,ref} from "vue";
+import {onMounted,ref} from "vue";
 onMounted(()=>{
   for (let i in appData) {
     faceList.value.push(appData[i].char);
